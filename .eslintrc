@@ -57,10 +57,6 @@
     "react"
   ],
   "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.eslint.js"
-      }
-    }
+    "import/resolver": "webpack"
   }
 }

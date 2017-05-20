@@ -1,7 +1,8 @@
 import React from 'react';
 
-export default class Home extends React.PureComponent {
+export default class LocoList extends React.PureComponent {
 	render() {
+		console.log('Kjrj')
 		return (
 			<div>Hello nevs!!!</div>
 		);
