@@ -1,3 +1,5 @@
+import 'expose-loader?moment!moment';
+import 'expose-loader?_!lodash';
 import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
@@ -9,6 +11,17 @@ import './app.global.css';
 const store = configureStore();
 injectTapEventPlugin();
 
+moment.locale('ru');
+moment.updateLocale('ru', {
+	calendar: {
+		lastDay: '[Вчера]',
+		sameDay: '[Сегодня]',
+		nextDay: '[Завтра]',
+		lastWeek: 'D MMMM',
+		nextWeek: 'D MMMM',
+		sameElse: 'D MMMM',
+	}
+});
 
 render(
 	<AppContainer>

@@ -15,10 +15,14 @@ body {
 	height: 100%;
 }
 
-.ui-page-content {
+.ui-page, .ui-page-content {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+}
+
+.ui-page-content {
+	padding: 10px 20px;
 }
 
 .ui-page-content--centered {

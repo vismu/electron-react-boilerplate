@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions';
-import {REQUEST_START, REQUEST_END, REQUEST_ERROR} from 'app/constants/App';
+import {REQUEST_START, REQUEST_END, REQUEST_ERROR, ADD_LOCO} from 'app/constants/App';
 
 const initialState = {
 	isFetching: false,
@@ -19,4 +19,8 @@ export default handleActions({
 		...state,
 		error,
 	}),
+	[ADD_LOCO]: (state, {payload: {loco}}) => ({
+		...state,
+		locoList: [...state.locoList, loco],
+	})
 }, initialState);
