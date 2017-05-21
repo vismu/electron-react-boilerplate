@@ -6,11 +6,54 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Home from 'material-ui/svg-icons/action/home';
+import Close from 'material-ui/svg-icons/navigation/close';
+import ReactTable from 'react-table';
+
+const columns = [{
+	Header: 'Общая информация',
+	columns: [{
+		Header: 'Тип локомотива',
+		id: 'type',
+		accessor: d => d.type,
+	}, {
+		Header: '№ локомотива',
+		id: 'id',
+		accessor: d => d.id,
+	}]
+}, {
+	Header: 'Дата начала производства',
+	columns: [{
+		Header: 'План',
+		id: 'plan_date_start',
+		accessor: d => moment.unix(d.plan_date_start).format('DD.MM.YYYY'),
+	}, {
+		Header: 'Факт',
+		id: 'fact_date_start',
+		accessor: d => moment.unix(d.fact_date_start).format('DD.MM.YYYY'),
+	}]
+}, {
+	Header: 'Дата сдачи локомотива ОАО «РЖД»',
+	columns: [{
+		Header: 'План',
+		id: 'plan_date_end',
+		accessor: d => moment.unix(d.plan_date_end).format('DD.MM.YYYY'),
+	}, {
+		Header: 'Факт',
+		id: 'fact_date_end',
+		accessor: d => d.fact_date_end
+	}]
+}, {
+	Header: '',
+	accessor: 'delete',
+	minWidth: 30,
+	Cell: () => <Close />
+}];
 
 export default class LocoList extends React.PureComponent {
 	static propTypes = {
 		changeRoute: PropTypes.func.isRequired,
 		locoList: PropTypes.arrayOf(LocoProps).isRequired,
+		deleteLoco: PropTypes.func.isRequired,
 	}
 
 	handleHomeClick = () => {
@@ -21,10 +64,18 @@ export default class LocoList extends React.PureComponent {
 		this.props.changeRoute('/locoadd');
 	}
 
+	handleColumnClick = (column, rowInfo) => {
+		if (column.id === 'delete') {
+			if (confirm('Удалить запись?')) this.props.deleteLoco({id: rowInfo.row.id});
+		} else {
+			this.props.changeRoute(`/loco/${rowInfo.row.id}`);
+		}
+	}
+
 	render() {
 		return (
 			<div className="ui-page">
-				<Toolbar>
+				<Toolbar style={{minHeight: '56px', maxHeight: '56px'}}>
 					<ToolbarGroup firstChild>
 						<FloatingActionButton
 							mini
@@ -45,6 +96,20 @@ export default class LocoList extends React.PureComponent {
 						</FlatButton>
 					</ToolbarGroup>
 				</Toolbar>
+				<div className="ui-page-content">
+					<ReactTable
+						className="-striped -highlight"
+						data={this.props.locoList}
+						columns={columns}
+						defaultPageSize={this.props.locoList.length > 10 ? this.props.locoList.length : 10}
+						showPagination={false}
+						filterable
+						noDataText="Записи отсутствуют"
+						getTdProps={(state, rowInfo, column) => ({
+							onClick: () => this.handleColumnClick(column, rowInfo)
+						})}
+					/>
+				</div>
 			</div>
 		);
 	}

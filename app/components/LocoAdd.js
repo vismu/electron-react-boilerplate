@@ -18,7 +18,7 @@ export default class LocoAdd extends React.PureComponent {
 	}
 
 	state = {
-		id: '',
+		id: NaN,
 		type: LocoTypes[0],
 		planStart: moment().unix(),
 		planEnd: moment().add(30, 'days').unix(),
@@ -41,23 +41,8 @@ export default class LocoAdd extends React.PureComponent {
 		this.props.changeRoute('/locolist');
 	}
 
-	handleAddLocoClick = () => {
-		if (this.state.id !== '') {
-			this.props.addLoco({
-				id: this.state.id,
-				type: this.state.type,
-				plan_date_start: this.state.planStart,
-				fact_date_start: moment().unix(),
-				plan_date_end: this.state.planEnd,
-				status: 'В работе',
-			});
-		} else {
-			this.setState({error: 'id'});
-		}
-	}
-
 	handleIdChange = (event, id) => {
-		this.setState({id});
+		this.setState({id: parseInt(id, 10)});
 	}
 
 	handleTypeChange = (event, index, type) => {
@@ -69,8 +54,23 @@ export default class LocoAdd extends React.PureComponent {
 	}
 
 	handlePlanEndChange = (event, date) => {
-		console.log(moment(date));
 		this.setState({planEnd: moment(date).unix()});
+	}
+
+	handleAddLocoClick = () => {
+		if (!Number.isNaN(this.state.id)) {
+			this.props.addLoco({
+				id: this.state.id,
+				type: this.state.type,
+				plan_date_start: this.state.planStart,
+				fact_date_start: moment().unix(),
+				plan_date_end: this.state.planEnd,
+				status: 'В работе',
+			});
+			this.props.changeRoute('/locolist');
+		} else {
+			this.setState({error: 'id'});
+		}
 	}
 
 	render() {
@@ -93,38 +93,45 @@ export default class LocoAdd extends React.PureComponent {
 					</ToolbarGroup>
 				</Toolbar>
 				<div className="ui-page-content">
+					Номер локомотива:
 					<TextField
-						value={this.state.id}
+						value={Number.isNaN(this.state.id) ? '' : this.state.id}
 						onChange={this.handleIdChange}
 						hintText="Номер локомотива"
 						errorText={this.state.error === 'id' ? 'Введите номер локомотива' : null}
+						style={{marginBottom: '32px'}}
 					/>
+					Тип локомотива:
 					<DropDownMenu
 						value={this.state.type}
 						onChange={this.handleTypeChange}
-						style={{width: '256px'}}
+						style={{width: '256px', marginBottom: '32px'}}
 						underlineStyle={{marginLeft: 0}}
 					>
 						{_.map(LocoTypes, (type) => (
 							<MenuItem key={type} value={type} primaryText={type} />
 						))}
 					</DropDownMenu>
+					Дата начала производства:
 					<DatePicker
 						value={moment.unix(this.state.planStart).toDate()}
 						locale="ru-RU"
 						hintText="Дата начала производства"
 						DateTimeFormat={global.Intl.DateTimeFormat}
 						onChange={this.handlePlanStartChange}
+						style={{marginBottom: '32px'}}
 					/>
+					Дата конца производства:
 					<DatePicker
 						value={moment.unix(this.state.planEnd).toDate()}
 						locale="ru-RU"
 						hintText="Дата конца производства"
 						DateTimeFormat={global.Intl.DateTimeFormat}
 						onChange={this.handlePlanEndChange}
+						style={{marginBottom: '32px'}}
 					/>
 					<RaisedButton
-						style={{marginTop: '24px', width: '200px'}}
+						style={{width: '200px'}}
 						label="Добавить"
 						onTouchTap={this.handleAddLocoClick}
 						primary

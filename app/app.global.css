@@ -1,3 +1,5 @@
+@import '../node_modules/react-table/react-table.css';
+
 body {
 	position: relative;
 	height: 100vh;

@@ -1,6 +1,6 @@
 import {push, replace} from 'react-router-redux';
 import {createAction} from 'redux-actions';
-import {REQUEST_START, REQUEST_END, REQUEST_ERROR, ADD_LOCO} from 'app/constants/App';
+import {REQUEST_START, REQUEST_END, REQUEST_ERROR, ADD_LOCO, DELETE_LOCO} from 'app/constants/App';
 
 export const changeRoute = (route, method = 'push') => (dispatch) => do {
 	if (method === 'replace') {
@@ -12,6 +12,11 @@ export const changeRoute = (route, method = 'push') => (dispatch) => do {
 
 export const addLoco = createAction(
 	ADD_LOCO,
+	(loco) => ({loco}),
+);
+
+export const deleteLoco = createAction(
+	DELETE_LOCO,
 	(loco) => ({loco}),
 );
 
