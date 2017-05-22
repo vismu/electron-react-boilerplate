@@ -1,29 +1,48 @@
 import React from 'react';
 import Gild from 'app/containers/Gild';
+import Action from 'app/components/Action';
+import Arrow from 'app/components/Arrow';
+import {Gilds} from 'app/constants/App';
+
+const scale = (window.innerHeight - 100) / 500;
 
 export default class FactoryScheme extends React.PureComponent {
 	render() {
 		return (
-			<div className="scheme">
-				<Gild title="Цех 40" status="ready" x={0} y={0} />
-				<Gild title="Цех 42" status="problem" x={0} y={40} />
-				<Gild title="Цех 43" status="ready" x={0} y={80} />
-				<Gild title="Цех 56" status="ready" x={0} y={120} />
-				<Gild title="Цех 47" status="problem" x={0} y={165} />
-				<Gild title="Цех 42" status="ready" x={0} y={215} />
-				<Gild title="Цех 43" status="ready" x={0} y={255} />
-				<Gild title="Цех 40" status="ready" x={0} y={355} />
-				<Gild title="Цех 56" status="problem" x={0} y={395} />
-				<Gild title="Цех 48" status="ready" x={220} y={460} />
-				<Gild title="Цех 42" status="ready" x={220} y={315} />
-				<Gild title="Цех 43" status="ready" x={270} y={315} />
+			<div className="scheme" style={{transform: `scale(${scale}, ${scale})`}}>
+				{_.map(Gilds, ({id, title, status, x, y, width, height}) => (
+					<Gild key={id} id={id} title={title} status={status} x={x} y={y} width={width} height={height} />
+				))}
 
-				<Gild title="Цех 43" x={80} y={0} width={100} height={195} />
-				<Gild title="Цех 47" status="ready" x={80} y={215} width={100} height={70} />
-				<Gild title="Цех 53" x={80} y={355} width={100} height={70} />
+				<Action title="Окраска перед монтажем" x={172} y={80} orientation="vertical" />
+				<Action title="Окраска после монтажа" x={640} y={80} orientation="vertical" />
+				<Action title="Центр проведения испытаний" x={460} y={215} width={270} height={100} />
+				<Action title="Сбыт" x={580} y={355} width={150} height={70} />
 
-				<Gild title="Цех 51" x={220} y={215} width={150} height={70} />
-				<Gild title="Цех 54" x={220} y={355} width={150} height={70} />
+				<Arrow x={40} y={12} />
+				<Arrow x={40} y={53} />
+				<Arrow x={40} y={93} />
+				<Arrow x={40} y={133} />
+				<Arrow x={40} y={173} />
+				<Arrow x={40} y={227} />
+				<Arrow x={40} y={267} />
+				<Arrow x={40} y={367} />
+				<Arrow x={40} y={407} />
+				<Arrow x={180} y={390} />
+				<Arrow x={180} y={250} />
+				<Arrow x={180} y={95} />
+				<Arrow x={259} y={95} />
+				<Arrow x={649} y={95} />
+				<Arrow x={550} y={388} />
+
+				<Arrow x={460} y={326} rotate="90" />
+				<Arrow x={693} y={180} rotate="90" />
+
+				<Arrow x={320} y={198} rotate="-90" />
+				<Arrow x={276} y={298} rotate="-90" />
+				<Arrow x={225} y={298} rotate="-90" />
+				<Arrow x={325} y={325} rotate="-90" />
+				<Arrow x={225} y={443} rotate="-90" />
 			</div>
 		);
 	}

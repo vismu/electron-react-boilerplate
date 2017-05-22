@@ -1,33 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Gild extends React.PureComponent {
+export default class Action extends React.PureComponent {
 	static propTypes = {
-		id: PropTypes.number.isRequired,
-		locoID: PropTypes.number.isRequired,
 		title: PropTypes.string.isRequired,
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 		width: PropTypes.number,
 		height: PropTypes.number,
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 		status: PropTypes.oneOf(['ready', 'problem', 'pending']),
-		changeRoute: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
-		width: 40,
-		height: 30,
+		width: 135,
+		height: 40,
 		status: 'pending',
+		orientation: 'horizontal',
 	}
 
-	handleClick = () => this.props.changeRoute(`/loco/${this.props.locoID}/gild/${this.props.id}`);
-
 	render() {
-		const {title, x, y, width, height, status} = this.props;
+		const {title, x, y, width, height, status, orientation} = this.props;
 
 		return (
 			<div
-				className={`gild gild--${status} gild--hover`}
+				className={`gild gild--${status}`}
 				style={{
 					minWidth: width,
 					maxWidth: width,
@@ -35,9 +32,9 @@ export default class Gild extends React.PureComponent {
 					maxHeight: height,
 					left: x,
 					top: y,
-					fontSize: width === 40 ? 10 : 14
+					fontSize: width === 135 ? 10 : 14,
+					transform: orientation === 'vertical' ? 'rotate(-90deg)' : null
 				}}
-				onClick={this.handleClick}
 			>
 				<span className="gild__title">{title}</span>
 			</div>

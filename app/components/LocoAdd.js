@@ -75,7 +75,7 @@ export default class LocoAdd extends React.PureComponent {
 	render() {
 		return (
 			<div className="ui-page">
-				<Toolbar>
+				<Toolbar style={{minHeight: '56px', maxHeight: '56px'}}>
 					<ToolbarGroup firstChild>
 						<FloatingActionButton
 							mini

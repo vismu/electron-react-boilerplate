@@ -25,6 +25,7 @@
     "import/no-webpack-loader-syntax": "off",
     "import/prefer-default-export": "off",
     "indent": ["error", "tab", {"SwitchCase": 1}],
+    "jsx-a11y/no-static-element-interactions": "off",
     "max-len": ["error", 130, 4],
     "no-console": "off",
     "no-useless-escape": "off",

@@ -47,7 +47,6 @@ body * {
 	max-width: 800px;
 	min-height: 500px;
 	max-height: 500px;
-	border: 1px solid #7e7e7e;
 }
 
 .gild {
@@ -57,6 +56,19 @@ body * {
 	position: absolute;
 	border: 1px solid #7e7e7e;
 	border-radius: 8px;
+}
+
+.gild--hover {
+	cursor: pointer;
+}
+
+.gild--hover:hover {
+	box-shadow: -1px 0px 22px -3px rgba(0,0,0,0.75);
+	transition: box-shadow 0.5;
+}
+
+.gild__title {
+	text-align: center;
 }
 
 .gild--ready {
@@ -69,4 +81,27 @@ body * {
 
 .gild--pending {
 	background-color: #fff;
+}
+
+.arrow {
+	position: absolute;
+	width: 30px;
+	height: 5px;
+	background: rgb(0, 188, 212);
+}
+.arrow:before,
+.arrow:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 40px solid transparent;
+	border-right: 0;
+}
+.arrow:after {
+	top: -4px;
+	right: -20px;
+	border-left-color: rgb(0, 188, 212);
+	border-width: 6px 0 6px 25px;
 }
