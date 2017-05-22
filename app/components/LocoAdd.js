@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Home from 'material-ui/svg-icons/action/home';
 import TextField from 'material-ui/TextField';
@@ -87,9 +86,9 @@ export default class LocoAdd extends React.PureComponent {
 						</FloatingActionButton>
 					</ToolbarGroup>
 					<ToolbarGroup>
-						<FlatButton disabled>
+						<div className="toolbar-header">
 							{moment().format('D MMMM YYYY, HH:mm')}
-						</FlatButton>
+						</div>
 					</ToolbarGroup>
 				</Toolbar>
 				<div className="ui-page-content">

@@ -5,7 +5,7 @@ export const REQUEST_END = 'REQUEST_END';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
 export const ADD_LOCO = 'ADD_LOCO';
 export const DELETE_LOCO = 'DELETE_LOCO';
-export const LocoTypes = ['3ЭС5К', '2ЭС4К', 'ЭП20'];
+export const LocoTypes = ['3ЭС5К', '3ЭС4К', '2ЭС4К', 'ЭП20'];
 
 export const LocoProps = PropTypes.shape({
 	id: PropTypes.number.isRequired,

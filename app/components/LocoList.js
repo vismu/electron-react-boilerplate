@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {LocoProps} from 'app/constants/App';
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Home from 'material-ui/svg-icons/action/home';
 import Close from 'material-ui/svg-icons/navigation/close';
@@ -68,7 +67,7 @@ export default class LocoList extends React.PureComponent {
 		if (column.id === 'delete') {
 			if (confirm('Удалить запись?')) this.props.deleteLoco({id: rowInfo.row.id});
 		} else {
-			this.props.changeRoute(`/loco/${rowInfo.row.id}`);
+			this.props.changeRoute(`/locoitem/${rowInfo.row.id}`);
 		}
 	}
 
@@ -91,9 +90,9 @@ export default class LocoList extends React.PureComponent {
 						/>
 					</ToolbarGroup>
 					<ToolbarGroup>
-						<FlatButton disabled>
+						<div className="toolbar-header">
 							{moment().format('D MMMM YYYY, HH:mm')}
-						</FlatButton>
+						</div>
 					</ToolbarGroup>
 				</Toolbar>
 				<div className="ui-page-content">
