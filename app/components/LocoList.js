@@ -29,6 +29,16 @@ const columns = [{
 		Header: 'Факт',
 		id: 'fact_date_start',
 		accessor: d => moment.unix(d.fact_date_start).format('DD.MM.YYYY'),
+		Cell: (row) => (
+			<div
+				style={{
+					padding: '5px 10px',
+					backgroundColor: row.row.fact_date_start > row.row.plan_date_start
+						? '#ff6666'
+						: '#88e188'
+				}}
+			>{row.value}</div>
+		)
 	}]
 }, {
 	Header: 'Дата сдачи локомотива ОАО «РЖД»',

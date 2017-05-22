@@ -36,7 +36,6 @@ export default class GildReport extends React.PureComponent {
 		loco: LocoProps.isRequired,
 		gild: GildProps.isRequired,
 		changeRoute: PropTypes.func.isRequired,
-		goBack: PropTypes.func.isRequired,
 	}
 
 	handleHomeClick = () => {
@@ -44,7 +43,7 @@ export default class GildReport extends React.PureComponent {
 	}
 
 	handleBackClick = () => {
-		this.props.goBack();
+		this.props.changeRoute(`/locoitem/${this.props.loco.id}`);
 	}
 
 	render() {

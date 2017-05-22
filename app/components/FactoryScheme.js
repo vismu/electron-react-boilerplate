@@ -1,23 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Gild from 'app/containers/Gild';
 import Action from 'app/components/Action';
 import Arrow from 'app/components/Arrow';
 import {Gilds} from 'app/constants/App';
 
-const scale = (window.innerHeight - 100) / 500;
-
 export default class FactoryScheme extends React.PureComponent {
+	static propTypes = {
+		locoID: PropTypes.number.isRequired,
+	}
+
 	render() {
+		const scale = (window.innerHeight - 100) / 500;
 		return (
 			<div className="scheme" style={{transform: `scale(${scale}, ${scale})`}}>
 				{_.map(Gilds, ({id, title, status, x, y, width, height}) => (
-					<Gild key={id} id={id} title={title} status={status} x={x} y={y} width={width} height={height} />
+					<Gild
+						key={id}
+						locoID={this.props.locoID}
+						id={id}
+						title={title}
+						status={status}
+						x={x}
+						y={y}
+						width={width}
+						height={height}
+					/>
 				))}
 
 				<Action title="Окраска перед монтажем" x={172} y={80} orientation="vertical" />
 				<Action title="Окраска после монтажа" x={640} y={80} orientation="vertical" />
-				<Action title="Центр проведения испытаний" x={460} y={215} width={270} height={100} />
-				<Action title="Сбыт" x={580} y={355} width={150} height={70} />
 
 				<Arrow x={40} y={12} />
 				<Arrow x={40} y={53} />

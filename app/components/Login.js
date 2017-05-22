@@ -63,6 +63,7 @@ export default class Login extends React.PureComponent {
 				/>
 				<RaisedButton
 					style={{marginTop: '8px', marginLeft: '160px'}}
+					primary
 					onClick={this.handleLoginTry}
 					label="Войти"
 				/>

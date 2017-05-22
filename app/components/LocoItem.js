@@ -43,7 +43,7 @@ export default class LocoItem extends React.PureComponent {
 					</ToolbarGroup>
 				</Toolbar>
 				<div className="ui-page-content ui-page-content--centered">
-					<FactoryScheme />
+					<FactoryScheme locoID={id} />
 				</div>
 			</div>
 		);

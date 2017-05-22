@@ -9,11 +9,12 @@ import GildReport from 'app/containers/GildReport';
 export default () => (
 	<div>
 		<Switch>
-			<Route exact path="/" component={Login} />
 			<Route path="/locolist" component={LocoList} />
 			<Route path="/locoadd" component={LocoAdd} />
 			<Route path="/locoitem/:id" component={LocoItem} />
 			<Route path="/loco/:locoID/gild/:gildID" component={GildReport} />
+			<Route path="/" component={Login} />
+			<Route path="" component={Login} />
 		</Switch>
 	</div>
 );

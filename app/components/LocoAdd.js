@@ -56,8 +56,13 @@ export default class LocoAdd extends React.PureComponent {
 		this.setState({planEnd: moment(date).unix()});
 	}
 
+	hasSameLoco = () => _.find(
+		JSON.parse(localStorage.getItem('locoList') || '[]'),
+		{id: this.state.id}
+	)
+
 	handleAddLocoClick = () => {
-		if (!Number.isNaN(this.state.id)) {
+		if (!Number.isNaN(this.state.id) && !this.hasSameLoco()) {
 			this.props.addLoco({
 				id: this.state.id,
 				type: this.state.type,
@@ -67,6 +72,8 @@ export default class LocoAdd extends React.PureComponent {
 				status: 'В работе',
 			});
 			this.props.changeRoute('/locolist');
+		} else if (this.hasSameLoco()) {
+			this.setState({error: 'same'});
 		} else {
 			this.setState({error: 'id'});
 		}
@@ -97,7 +104,15 @@ export default class LocoAdd extends React.PureComponent {
 						value={Number.isNaN(this.state.id) ? '' : this.state.id}
 						onChange={this.handleIdChange}
 						hintText="Номер локомотива"
-						errorText={this.state.error === 'id' ? 'Введите номер локомотива' : null}
+						errorText={
+							/*eslint-disable */
+							this.state.error === 'id'
+							? 'Введите номер локомотива'
+							: this.state.error === 'same'
+							? 'Локомотив с таким номер уже есть'
+							: null
+							/*eslint-enable */
+						}
 						style={{marginBottom: '32px'}}
 					/>
 					Тип локомотива:

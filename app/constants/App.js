@@ -143,4 +143,18 @@ export const Gilds = [{
 	y: 355,
 	width: 150,
 	height: 70,
-}]
+}, {
+	id: 19,
+	title: 'Центр проведения испытаний',
+	x: 460,
+	y: 215,
+	width: 270,
+	height: 100,
+}, {
+	id: 20,
+	title: 'Сбыт',
+	x: 580,
+	y: 355,
+	width: 150,
+	height: 70,
+}];
