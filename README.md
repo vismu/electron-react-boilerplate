@@ -38,7 +38,7 @@ Start the app in the `dev` environment. This starts the renderer process in [**h
 $ npm run dev
 ```
 
-## Login 
+## on Login screen 
 
 user: admin 
 password: admin
